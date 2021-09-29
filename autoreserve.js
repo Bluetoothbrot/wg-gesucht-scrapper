@@ -20,6 +20,7 @@ function autoreserve() {
           data: loginInfo,
       }).then(function (response) {
         if(response.status == 200) {
+            console.log(response.headers['set-cookie'].toString())
             return response.headers['set-cookie'].toString()
         }
       })
@@ -28,14 +29,14 @@ function autoreserve() {
       });
     }
     this.getMessage = async function (messageId, headers) {
-        headers 
+        headers
         return axios({
             method: 'get',
             url: process.env.MESSAGE_URL + messageId,
             headers: headers
           })
           .then(function (response) {
-    
+
             let $ = cheerio.load(response.data)
             return $("#content").text();
           })
@@ -46,7 +47,7 @@ function autoreserve() {
     this.getMessageData = async function (roomId, headers) {
         return axios({
             method: 'get',
-            url: 'https://www.wg-gesucht.de/en/nachricht-senden.html?message_ad_id='+roomId,
+            url: 'https://www.wg-gesucht.de/nachricht-senden/wg-zimmer-in-Tubingen.'+roomId+'.html',
             headers: headers
         })
         .then(function (response){
@@ -54,6 +55,7 @@ function autoreserve() {
             let csrfToken =  $(".csrf_token").val()
             //let userId =  $("[name='user_id']").val()
             let userId =  $('.logout_button').data('user_id')
+            console.log("userId: "+ userId);
             return {
                 'userId': userId,
                 'csrfToken': csrfToken
@@ -67,14 +69,14 @@ function autoreserve() {
             "csrf_token": messageData.csrfToken,
             "messages": [
                 {
-                "content": room.lang === 'eng' ? messageTemplates.eng : messageTemplates.ger,
+                "content": messageTemplates.ger,
                 "message_type": "text"
                 }
             ],
             "ad_type": "0",
             "ad_id": room.id
         }
-        console.log('sending message')
+        console.log('+++ Sending message')
         return axios({
             method: 'post',
             url: process.env.POST_MESSAGE_URL,
@@ -101,7 +103,7 @@ function autoreserve() {
 
             let messageData = await this.getMessageData(rooms[i].id, headers)
             let messageStatus = await this.sendMessage(rooms[i], headers, messageData, messageTemplates)
-            
+
             if(messageStatus) {
                 db.get('rooms')
                 .find({ id: rooms[i].id})

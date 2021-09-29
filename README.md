@@ -4,7 +4,7 @@
 A nodejs script for scrapping and the reservation of rooms or flats in the Wg-gesucht site.
 
 
-## Instalation
+## Installation
 
     $ npm install
     $ cp .env.example .env
@@ -31,7 +31,7 @@ Copy the id to the .env file
 
     MESSAGE_ENG=YOUR-MESSAGE-ID
     MESSAGE_GER=YOUR-MESSAGE-ID
-    
+
 ### Filter
 You can either use an existing custom saved filter or use the url generated after a search applying the filters you want. Both of them should have a format similar to:
 
