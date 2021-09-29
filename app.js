@@ -41,4 +41,4 @@ setInterval(()=> scrapperInstance.crawl(), 5*60*1000);
 })();
 
 
-setInterval(()=> autoreserveInstance.processAndReserve(headers, messageTemplates), 10*1000);
+setInterval(()=> autoreserveInstance.processAndReserve(headers, messageTemplates), 5*60*1000);
