@@ -4,7 +4,7 @@
   "description": "A scrapper to get and bid for apartments in Wg-Gesucht",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "author": "Juan Cruz Martino",
   "license": "ISC",
@@ -14,5 +14,13 @@
     "dotenv": "^8.1.0",
     "franc": "^4.1.0",
     "lowdb": "^1.0.0"
+  }
+}
+
+{
+  "name": "test app",
+  "version": "1.0.0",
+  "scripts": {
+
   }
 }
