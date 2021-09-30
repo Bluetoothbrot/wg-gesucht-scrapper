@@ -83,6 +83,7 @@ function autoreserve() {
             headers: headers,
             data: message
         }).then(function (resp) {
+            console.log("+++++++++++++++++++++++++++++++++++++++++++ New Inserat Contacted");
             return true
         })
         .catch(function (error) {

@@ -37,9 +37,16 @@ function scrapper() {
           let index = res.search("data-ad_id=")
           let adId = res.substring(index+12,index+12+7);
           data = {'id': adId, 'sent': 0 }
-          db.get('rooms')
-              .push(data)
-              .write()
+
+          let room = db.get('rooms')
+              .find({ id: id })
+              .value()
+          if(room==null) {
+            db.get('rooms')
+                .push(data)
+                .write()
+          }
+
 
           console.log("+++ AdId: " + adId);
           res = res.substring(index+12,res.length)
