@@ -38,14 +38,10 @@ function scrapper() {
           let adId = res.substring(index+12,index+12+7);
           data = {'id': adId, 'sent': 0 }
 
-          let room = db.get('rooms')
-              .find({ id: id })
-              .value()
-          if(room==null) {
             db.get('rooms')
                 .push(data)
                 .write()
-          }
+
 
 
           console.log("+++ AdId: " + adId);
